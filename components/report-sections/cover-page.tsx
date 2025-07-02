@@ -8,31 +8,29 @@ interface CoverPageProps {
 
 export function CoverPage({ data }: CoverPageProps) {
   return (
-    <div className="min-h-screen flex items-center justify-center p-8">
+    <div id="cover-page" className="min-h-screen flex items-center justify-center p-8">
       <div className="max-w-4xl w-full">
         {/* Main Title Card */}
-        <Card className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border-white/20 shadow-2xl mb-8">
+        <Card className="bg-white/90 backdrop-blur-xl border-blue-200 shadow-2xl mb-8">
           <div className="p-12 text-center">
             <div className="mb-6">
-              <div className="inline-block p-4 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm mb-4">
-                <div className="w-16 h-16 bg-gradient-to-r from-orange-400 to-amber-400 rounded-full flex items-center justify-center">
+              <div className="inline-block p-4 rounded-full bg-blue-50 border border-blue-200 mb-4">
+                <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg">
                   <span className="text-2xl font-bold text-white">🏗️</span>
                 </div>
               </div>
             </div>
 
-            <h1 className="text-5xl font-bold text-white mb-4 bg-gradient-to-r from-orange-400 via-amber-400 to-orange-400 bg-clip-text text-transparent">
-              Daily Progress Report
-            </h1>
+            <h1 className="text-5xl font-bold text-blue-900 mb-4">Construction Progress Report</h1>
 
-            <h2 className="text-3xl font-semibold text-white/90 mb-6">{data.siteInfo.name}</h2>
+            <h2 className="text-3xl font-semibold text-blue-700 mb-6">Project Dashboard</h2>
 
             <div className="flex items-center justify-center space-x-2 mb-8">
-              <Badge variant="secondary" className="bg-orange-500/20 text-orange-200 border-orange-400/30">
-                Report ID: {data.siteInfo.reportId}
-              </Badge>
-              <Badge variant="secondary" className="bg-amber-500/20 text-amber-200 border-amber-400/30">
+              <Badge variant="secondary" className="bg-blue-100 text-blue-800 border-blue-300 px-4 py-2">
                 {data.metrics.overallCompletion}% Complete
+              </Badge>
+              <Badge variant="secondary" className="bg-white text-blue-700 border-blue-200 px-4 py-2">
+                {data.components.completed}/{data.components.total} Components Done
               </Badge>
             </div>
           </div>
@@ -40,58 +38,58 @@ export function CoverPage({ data }: CoverPageProps) {
 
         {/* Info Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Card className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border-white/20">
+          <Card className="bg-white/80 backdrop-blur-xl border-blue-200 hover:border-blue-300 transition-all duration-300">
             <div className="p-6">
               <div className="flex items-center space-x-3 mb-4">
-                <div className="p-2 rounded-lg bg-orange-500/20">
-                  <Calendar className="h-5 w-5 text-orange-400" />
+                <div className="p-3 rounded-lg bg-blue-50 border border-blue-200">
+                  <Calendar className="h-5 w-5 text-blue-600" />
                 </div>
-                <h3 className="text-lg font-semibold text-white">Report Date</h3>
+                <h3 className="text-lg font-semibold text-blue-900">Report Date</h3>
               </div>
-              <p className="text-2xl font-bold text-white/90">{data.siteInfo.date}</p>
+              <p className="text-2xl font-bold text-blue-800">{data.siteInfo.date}</p>
             </div>
           </Card>
 
-          <Card className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border-white/20">
+          <Card className="bg-white/80 backdrop-blur-xl border-blue-200 hover:border-blue-300 transition-all duration-300">
             <div className="p-6">
               <div className="flex items-center space-x-3 mb-4">
-                <div className="p-2 rounded-lg bg-amber-500/20">
-                  <MapPin className="h-5 w-5 text-amber-400" />
+                <div className="p-3 rounded-lg bg-blue-50 border border-blue-200">
+                  <MapPin className="h-5 w-5 text-blue-600" />
                 </div>
-                <h3 className="text-lg font-semibold text-white">Location</h3>
+                <h3 className="text-lg font-semibold text-blue-900">Location</h3>
               </div>
-              <p className="text-lg text-white/90">{data.siteInfo.location}</p>
+              <p className="text-lg text-blue-800">{data.siteInfo.location}</p>
             </div>
           </Card>
 
-          <Card className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border-white/20">
+          <Card className="bg-white/80 backdrop-blur-xl border-blue-200 hover:border-blue-300 transition-all duration-300">
             <div className="p-6">
               <div className="flex items-center space-x-3 mb-4">
-                <div className="p-2 rounded-lg bg-orange-500/20">
-                  <User className="h-5 w-5 text-orange-400" />
+                <div className="p-3 rounded-lg bg-blue-50 border border-blue-200">
+                  <User className="h-5 w-5 text-blue-600" />
                 </div>
-                <h3 className="text-lg font-semibold text-white">Supervisor</h3>
+                <h3 className="text-lg font-semibold text-blue-900">Supervisor</h3>
               </div>
-              <p className="text-lg text-white/90">{data.siteInfo.supervisor}</p>
+              <p className="text-lg text-blue-800">{data.siteInfo.supervisor}</p>
             </div>
           </Card>
 
-          <Card className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border-white/20">
+          <Card className="bg-white/80 backdrop-blur-xl border-blue-200 hover:border-blue-300 transition-all duration-300">
             <div className="p-6">
               <div className="flex items-center space-x-3 mb-4">
-                <div className="p-2 rounded-lg bg-amber-500/20">
-                  <CloudSun className="h-5 w-5 text-amber-400" />
+                <div className="p-3 rounded-lg bg-blue-50 border border-blue-200">
+                  <CloudSun className="h-5 w-5 text-blue-600" />
                 </div>
-                <h3 className="text-lg font-semibold text-white">Weather</h3>
+                <h3 className="text-lg font-semibold text-blue-900">Weather</h3>
               </div>
-              <p className="text-lg text-white/90">{data.siteInfo.weather}</p>
+              <p className="text-lg text-blue-800">{data.siteInfo.weather}</p>
             </div>
           </Card>
         </div>
 
         {/* Footer */}
         <div className="text-center mt-12">
-          <p className="text-white/60 text-sm">
+          <p className="text-blue-600 text-sm">
             Generated on {new Date().toLocaleDateString()} • Confidential Document
           </p>
         </div>

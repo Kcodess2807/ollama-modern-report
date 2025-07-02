@@ -39,71 +39,63 @@ export function ProgressMetrics({ data }: ProgressMetricsProps) {
       key: "structuralIntegrity",
       label: "Structural Integrity",
       icon: Shield,
-      color: "green",
+      color: "blue",
       description: "Build quality assessment",
     },
     {
       key: "alignmentAccuracy",
       label: "Design Alignment",
       icon: Target,
-      color: "purple",
+      color: "blue",
       description: "Adherence to specifications",
     },
     {
       key: "qualityScore",
       label: "Quality Score",
       icon: Award,
-      color: "yellow",
+      color: "blue",
       description: "Workmanship evaluation",
     },
     {
       key: "safetyCompliance",
       label: "Safety Compliance",
       icon: Shield,
-      color: "red",
+      color: "blue",
       description: "Safety standards adherence",
     },
     {
       key: "scheduleAdherence",
       label: "Schedule Adherence",
       icon: Clock,
-      color: "indigo",
+      color: "blue",
       description: "Timeline performance",
     },
   ]
 
-  const getColorClasses = (color: string) => {
-    const colors = {
-      blue: "from-orange-500/20 to-orange-600/20 border-orange-400/30 text-orange-400",
-      green: "from-green-500/20 to-green-600/20 border-green-400/30 text-green-400",
-      purple: "from-amber-500/20 to-amber-600/20 border-amber-400/30 text-amber-400",
-      yellow: "from-yellow-500/20 to-yellow-600/20 border-yellow-400/30 text-yellow-400",
-      red: "from-red-500/20 to-red-600/20 border-red-400/30 text-red-400",
-      indigo: "from-orange-600/20 to-amber-600/20 border-orange-400/30 text-orange-400",
-    }
-    return colors[color as keyof typeof colors] || colors.blue
-  }
-
   const getStatusBadge = (value: number) => {
     if (value >= 90)
-      return { text: "Excellent", variant: "default", className: "bg-green-500/20 text-green-200 border-green-400/30" }
+      return {
+        text: "Excellent",
+        variant: "default",
+        className: "bg-blue-100 text-blue-800 border-blue-300",
+      }
     if (value >= 75)
-      return { text: "Good", variant: "secondary", className: "bg-orange-500/20 text-orange-200 border-orange-400/30" }
+      return { text: "Good", variant: "secondary", className: "bg-blue-50 text-blue-700 border-blue-200" }
     if (value >= 60)
-      return { text: "Fair", variant: "secondary", className: "bg-yellow-500/20 text-yellow-200 border-yellow-400/30" }
+      return { text: "Fair", variant: "secondary", className: "bg-blue-50 text-blue-600 border-blue-200" }
     return {
       text: "Needs Attention",
       variant: "destructive",
-      className: "bg-red-500/20 text-red-200 border-red-400/30",
+      className: "bg-red-50 text-red-700 border-red-200",
     }
   }
 
   return (
-    <div className="min-h-screen p-8">
+    <div id="progress-metrics" className="min-h-screen p-8">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-white mb-4">Progress Metrics Dashboard</h1>
-          <p className="text-white/70 text-lg">Real-time performance indicators and quality assessments</p>
+          <h1 className="text-4xl font-bold text-blue-900 mb-4">Progress Metrics Dashboard</h1>
+          <p className="text-blue-700 text-lg">Real-time performance indicators and quality assessments</p>
         </div>
 
         {/* Key Performance Indicators */}
@@ -116,26 +108,26 @@ export function ProgressMetrics({ data }: ProgressMetricsProps) {
             return (
               <Card
                 key={metric.key}
-                className={`bg-gradient-to-br ${getColorClasses(metric.color)} backdrop-blur-xl border-white/20 hover:scale-105 transition-all duration-300`}
+                className="bg-white/90 backdrop-blur-xl border-blue-200 hover:scale-105 transition-all duration-300 hover:border-blue-300"
               >
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-4">
-                    <div className={`p-3 rounded-lg bg-gradient-to-r ${getColorClasses(metric.color)}`}>
-                      <IconComponent className="h-6 w-6" />
+                    <div className="p-3 rounded-lg bg-blue-50 border border-blue-200">
+                      <IconComponent className="h-6 w-6 text-blue-600" />
                     </div>
                     <Badge className={status.className}>{status.text}</Badge>
                   </div>
 
-                  <h3 className="text-lg font-semibold text-white mb-2">{metric.label}</h3>
-                  <p className="text-sm text-white/60 mb-4">{metric.description}</p>
+                  <h3 className="text-lg font-semibold text-blue-900 mb-2">{metric.label}</h3>
+                  <p className="text-sm text-blue-700 mb-4">{metric.description}</p>
 
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-3xl font-bold text-white">{value}%</span>
-                      {value < 75 && <AlertTriangle className="h-5 w-5 text-yellow-400" />}
+                      <span className="text-3xl font-bold text-blue-800">{value}%</span>
+                      {value < 75 && <AlertTriangle className="h-5 w-5 text-amber-500" />}
                     </div>
 
-                    <Progress value={value} className="h-3 bg-white/10" />
+                    <Progress value={value} className="h-3 bg-blue-100" />
                   </div>
                 </div>
               </Card>
@@ -145,13 +137,13 @@ export function ProgressMetrics({ data }: ProgressMetricsProps) {
 
         {/* Summary Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <Card className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border-white/20">
+          <Card className="bg-white/90 backdrop-blur-xl border-blue-200">
             <div className="p-6">
-              <h3 className="text-xl font-semibold text-white mb-4">Performance Summary</h3>
+              <h3 className="text-xl font-semibold text-blue-900 mb-4">Performance Summary</h3>
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
-                  <span className="text-white/70">Average Score:</span>
-                  <span className="text-2xl font-bold text-white">
+                  <span className="text-blue-700">Average Score:</span>
+                  <span className="text-2xl font-bold text-blue-800">
                     {Math.round(
                       Object.values(data.metrics).reduce((a, b) => a + b, 0) / Object.values(data.metrics).length,
                     )}
@@ -159,44 +151,44 @@ export function ProgressMetrics({ data }: ProgressMetricsProps) {
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-white/70">Highest Metric:</span>
-                  <span className="text-green-400 font-semibold">
+                  <span className="text-blue-700">Highest Metric:</span>
+                  <span className="text-blue-600 font-semibold">
                     Safety Compliance ({data.metrics.safetyCompliance}%)
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-white/70">Needs Focus:</span>
-                  <span className="text-yellow-400 font-semibold">
-                    Schedule Adherence ({data.metrics.scheduleAdherence}%)
+                  <span className="text-blue-700">Needs Focus:</span>
+                  <span className="text-amber-600 font-semibold">
+                    Overall Completion ({data.metrics.overallCompletion}%)
                   </span>
                 </div>
               </div>
             </div>
           </Card>
 
-          <Card className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border-white/20">
+          <Card className="bg-white/90 backdrop-blur-xl border-blue-200">
             <div className="p-6">
-              <h3 className="text-xl font-semibold text-white mb-4">Quality Indicators</h3>
+              <h3 className="text-xl font-semibold text-blue-900 mb-4">Quality Indicators</h3>
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-white/70">Build Quality:</span>
+                  <span className="text-blue-700">Build Quality:</span>
                   <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 rounded-full bg-green-400"></div>
-                    <span className="text-white">Excellent</span>
+                    <div className="w-3 h-3 rounded-full bg-blue-500"></div>
+                    <span className="text-blue-900">Excellent</span>
                   </div>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-white/70">Safety Status:</span>
+                  <span className="text-blue-700">Safety Status:</span>
                   <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 rounded-full bg-green-400"></div>
-                    <span className="text-white">Compliant</span>
+                    <div className="w-3 h-3 rounded-full bg-blue-500"></div>
+                    <span className="text-blue-900">Compliant</span>
                   </div>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-white/70">Timeline Status:</span>
+                  <span className="text-blue-700">Timeline Status:</span>
                   <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
-                    <span className="text-white">Monitor</span>
+                    <div className="w-3 h-3 rounded-full bg-amber-500"></div>
+                    <span className="text-blue-900">Monitor</span>
                   </div>
                 </div>
               </div>
