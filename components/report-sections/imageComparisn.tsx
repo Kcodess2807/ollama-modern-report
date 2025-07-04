@@ -1,4 +1,3 @@
-import React, { useRef, useState } from "react"
 import { Card } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
@@ -9,27 +8,6 @@ interface ImageComparisonProps {
 }
 
 export function ImageComparison({ data }: ImageComparisonProps) {
-  // State for uploaded images
-  const [currentPhoto, setCurrentPhoto] = useState<string | null>(null)
-  const [targetPhoto, setTargetPhoto] = useState<string | null>(null)
-
-  // References for file inputs
-  const currentInputRef = useRef<HTMLInputElement>(null)
-  const targetInputRef = useRef<HTMLInputElement>(null)
-
-  // Handlers for file changes
-  const handleCurrentPhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setCurrentPhoto(URL.createObjectURL(e.target.files[0]))
-    }
-  }
-
-  const handleTargetPhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setTargetPhoto(URL.createObjectURL(e.target.files[0]))
-    }
-  }
-
   return (
     <div id="image-comparison" className="min-h-screen p-8">
       <div className="max-w-7xl mx-auto">
@@ -48,6 +26,8 @@ export function ImageComparison({ data }: ImageComparisonProps) {
             </TabsTrigger>
           </TabsList>
 
+          <h1 className="text-4xl font-bold mt-5 text-blue-900 mb-4">Dining Area</h1>
+
           <TabsContent value="side-by-side" className="mt-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Current Photo */}
@@ -57,43 +37,18 @@ export function ImageComparison({ data }: ImageComparisonProps) {
                     <div className="p-2 rounded-lg bg-blue-50 border border-blue-200">
                       <Camera className="h-5 w-5 text-blue-600" />
                     </div>
-                    <h3 className="text-xl font-semibold text-blue-900">Current Site Photo</h3>
+                    <h3 className="text-xl font-semibold text-blue-900">Current Site SnapShot</h3>
                     <Badge variant="secondary" className="bg-blue-100 text-blue-800 border-blue-300">
                       Live
                     </Badge>
-                    {/* Upload button */}
-                    <button
-                      type="button"
-                      className="ml-2 px-2 py-1 rounded bg-blue-50 border border-blue-200 text-blue-700 text-xs"
-                      onClick={() => currentInputRef.current?.click()}
-                    >
-                      Upload
-                    </button>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      ref={currentInputRef}
-                      style={{ display: "none" }}
-                      onChange={handleCurrentPhotoChange}
-                    />
                   </div>
                   <div className="relative group">
                     <img
-                      src={currentPhoto || data.images?.current || "/placeholder.svg?height=320&width=480"}
+                      src={data.images?.current || "/placeholder.svg?height=320&width=480"}
                       alt="Current construction site"
                       className="w-full h-80 object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </div>
-                  <div className="mt-4 space-y-2">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-blue-700">Captured:</span>
-                      <span className="text-blue-900">{data.siteInfo.date}</span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-blue-700">Weather:</span>
-                      <span className="text-blue-900">{data.siteInfo.weather}</span>
-                    </div>
                   </div>
                 </div>
               </Card>
@@ -105,43 +60,18 @@ export function ImageComparison({ data }: ImageComparisonProps) {
                     <div className="p-2 rounded-lg bg-blue-50 border border-blue-200">
                       <Target className="h-5 w-5 text-blue-600" />
                     </div>
-                    <h3 className="text-xl font-semibold text-blue-900">Target Design</h3>
+                    <h3 className="text-xl font-semibold text-blue-900">Render</h3>
                     <Badge variant="secondary" className="bg-blue-50 text-blue-700 border-blue-200">
                       Reference
                     </Badge>
-                    {/* Upload button */}
-                    <button
-                      type="button"
-                      className="ml-2 px-2 py-1 rounded bg-blue-50 border border-blue-200 text-blue-700 text-xs"
-                      onClick={() => targetInputRef.current?.click()}
-                    >
-                      Upload
-                    </button>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      ref={targetInputRef}
-                      style={{ display: "none" }}
-                      onChange={handleTargetPhotoChange}
-                    />
                   </div>
                   <div className="relative group">
                     <img
-                      src={targetPhoto || data.images?.render || "/placeholder.svg?height=320&width=480"}
+                      src={data.images?.render || "/placeholder.svg?height=320&width=480"}
                       alt="Architectural render"
                       className="w-full h-80 object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </div>
-                  <div className="mt-4 space-y-2">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-blue-700">Alignment Score:</span>
-                      <span className="text-blue-900 font-semibold">{data.metrics.alignmentAccuracy}%</span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-blue-700">Structural Match:</span>
-                      <span className="text-blue-900 font-semibold">{data.metrics.structuralIntegrity}%</span>
-                    </div>
                   </div>
                 </div>
               </Card>
@@ -154,7 +84,7 @@ export function ImageComparison({ data }: ImageComparisonProps) {
                 <h3 className="text-xl font-semibold text-blue-900 mb-4">Overlay Analysis</h3>
                 <div className="relative">
                   <img
-                    src={currentPhoto || data.images?.current || "/placeholder.svg?height=384&width=768"}
+                    src={data.images?.current || "/placeholder.svg?height=384&width=768"}
                     alt="Overlay comparison"
                     className="w-full h-96 object-cover rounded-lg"
                   />
