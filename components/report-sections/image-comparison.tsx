@@ -1,3 +1,4 @@
+import React, { useRef, useState } from "react"
 import { Card } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
@@ -8,6 +9,27 @@ interface ImageComparisonProps {
 }
 
 export function ImageComparison({ data }: ImageComparisonProps) {
+  // State for uploaded images
+  const [currentPhoto, setCurrentPhoto] = useState<string | null>(null)
+  const [targetPhoto, setTargetPhoto] = useState<string | null>(null)
+
+  // References for file inputs
+  const currentInputRef = useRef<HTMLInputElement>(null)
+  const targetInputRef = useRef<HTMLInputElement>(null)
+
+  // Handlers for file changes
+  const handleCurrentPhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setCurrentPhoto(URL.createObjectURL(e.target.files[0]))
+    }
+  }
+
+  const handleTargetPhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setTargetPhoto(URL.createObjectURL(e.target.files[0]))
+    }
+  }
+
   return (
     <div id="image-comparison" className="min-h-screen p-8">
       <div className="max-w-7xl mx-auto">
@@ -39,10 +61,25 @@ export function ImageComparison({ data }: ImageComparisonProps) {
                     <Badge variant="secondary" className="bg-blue-100 text-blue-800 border-blue-300">
                       Live
                     </Badge>
+                    {/* Upload button */}
+                    <button
+                      type="button"
+                      className="ml-2 px-2 py-1 rounded bg-blue-50 border border-blue-200 text-blue-700 text-xs"
+                      onClick={() => currentInputRef.current?.click()}
+                    >
+                      Upload
+                    </button>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      ref={currentInputRef}
+                      style={{ display: "none" }}
+                      onChange={handleCurrentPhotoChange}
+                    />
                   </div>
                   <div className="relative group">
                     <img
-                      src={data.images?.current || "/placeholder.svg?height=320&width=480"}
+                      src={currentPhoto || data.images?.current || "/placeholder.svg?height=320&width=480"}
                       alt="Current construction site"
                       className="w-full h-80 object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
                     />
@@ -72,10 +109,25 @@ export function ImageComparison({ data }: ImageComparisonProps) {
                     <Badge variant="secondary" className="bg-blue-50 text-blue-700 border-blue-200">
                       Reference
                     </Badge>
+                    {/* Upload button */}
+                    <button
+                      type="button"
+                      className="ml-2 px-2 py-1 rounded bg-blue-50 border border-blue-200 text-blue-700 text-xs"
+                      onClick={() => targetInputRef.current?.click()}
+                    >
+                      Upload
+                    </button>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      ref={targetInputRef}
+                      style={{ display: "none" }}
+                      onChange={handleTargetPhotoChange}
+                    />
                   </div>
                   <div className="relative group">
                     <img
-                      src={data.images?.render || "/placeholder.svg?height=320&width=480"}
+                      src={targetPhoto || data.images?.render || "/placeholder.svg?height=320&width=480"}
                       alt="Architectural render"
                       className="w-full h-80 object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
                     />
@@ -102,7 +154,7 @@ export function ImageComparison({ data }: ImageComparisonProps) {
                 <h3 className="text-xl font-semibold text-blue-900 mb-4">Overlay Analysis</h3>
                 <div className="relative">
                   <img
-                    src={data.images?.current || "/placeholder.svg?height=384&width=768"}
+                    src={currentPhoto || data.images?.current || "/placeholder.svg?height=384&width=768"}
                     alt="Overlay comparison"
                     className="w-full h-96 object-cover rounded-lg"
                   />
