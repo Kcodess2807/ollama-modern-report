@@ -334,9 +334,9 @@ export function ProgressMetrics({ data }: ProgressMetricsProps) {
             <div className="p-6 text-center">
               <CheckCircle className="h-12 w-12 text-blue-600 mx-auto mb-4" />
               <div className="text-3xl font-bold text-blue-600 mb-2">
-                {data.components.completed}
+                {data.components.total}
               </div>
-              <div className="text-blue-700">Completed Task</div>
+              <div className="text-blue-700">Total Task</div>
             </div>
           </Card>
 
@@ -357,6 +357,16 @@ export function ProgressMetrics({ data }: ProgressMetricsProps) {
                 {data.components.pending}
               </div>
               <div className="text-blue-700">Pending Start</div>
+            </div>
+          </Card>
+
+          <Card className="bg-white/90 backdrop-blur-xl w-[20rem] border-blue-300">
+            <div className="p-6 text-center">
+              <CheckCircle className="h-12 w-12 text-blue-600 mx-auto mb-4" />
+              <div className="text-3xl font-bold text-blue-600 mb-2">
+                {data.components.completed}
+              </div>
+              <div className="text-blue-700">Completed Task</div>
             </div>
           </Card>
         </div>
