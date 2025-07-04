@@ -1,13 +1,12 @@
 "use client"
 
 import { useState } from "react"
-import { CoverPage } from "./report-sections/cover-page"
-import { ImageComparison } from "./report-sections/image-comparison"
-import { ProgressMetrics } from "./report-sections/progress-metrics"
-import { CompletionChart } from "./report-sections/completion-chart"
-import { ComponentStatus } from "./report-sections/component-status"
-import { HistoricalTrends } from "./report-sections/historical-trends"
-import { InsightsRemarks } from "./report-sections/insights-remarks"
+import { CoverPage } from "@/components/report-sections/cover-page"
+import { ProgressMetrics } from "@/components/report-sections/progressMetrics"
+import { CompletionChart } from "@/components/report-sections/completionChart"
+import { ComponentStatus } from "@/components/report-sections/componentStatus"
+import { InsightsRemarks } from "@/components/report-sections/insightsRemarks"
+import { ImageComparison } from "./report-sections/imageComparisn"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { PDFGenerator } from "./pdf"
@@ -21,12 +20,11 @@ export function ConstructionReport({ data }: ConstructionReportProps) {
 
   const pages = [
     { title: "Cover", component: <CoverPage data={data} /> },
-    { title: "Image Comparison", component: <ImageComparison data={data} /> },
     { title: "Progress Metrics", component: <ProgressMetrics data={data} /> },
-    { title: "Completion Overview", component: <CompletionChart data={data} /> },
     { title: "Component Status", component: <ComponentStatus data={data} /> },
-    { title: "Historical Trends", component: <HistoricalTrends data={data} /> },
+    { title: "Image Comparison", component: <ImageComparison data={data} /> },
     { title: "Insights & Remarks", component: <InsightsRemarks data={data} /> },
+    // { title: "Completion Overview", component: <CompletionChart data={data} /> },
   ]
 
   const nextPage = () => {
