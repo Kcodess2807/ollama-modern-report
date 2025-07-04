@@ -35,9 +35,9 @@ const sampleReportData = {
   },
 
   components: {
-    completed: 4,
+    completed: 0,
     inProgress: 3,
-    pending: 3,
+    pending: 7,
     total: 10,
   },
   categories: [
